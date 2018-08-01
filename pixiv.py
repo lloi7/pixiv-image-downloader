@@ -65,7 +65,7 @@ downloadDir = "C:\\Users\\xinya\\Pictures\\pixiv\\"
 loginUrl = "https://accounts.pixiv.net/api/login?lang=zh"
 loginPage = "https://accounts.pixiv.net/login?lang=zh"
 mainUrl = "https://www.pixiv.net"
-dailyRankingUrl = "https://www.pixiv.net/ranking.php"
+dailyRankingUrl = "https://www.pixiv.net/ranking.php?content=illust"
 imgUrlRes = "https://i.pximg.net"
 sys_type = sys.getfilesystemencoding()
 files = ""
