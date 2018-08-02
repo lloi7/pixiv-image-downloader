@@ -207,7 +207,11 @@ if __name__ == "__main__":
 		sess, con = login()
 		if get_index(sys.argv, "-d") != -1:
 			downloadDir = sys.argv[get_index(sys.argv, "-d")+1]
-			os.chdir(downloadDir)
+			try:
+			os.chdir(Dir)
+			except FileNotFoundError:
+				os.system("mkdir "+Dir)
+				os.chdir(Dir)
 		if get_index(sys.argv, "-r") != -1:
 			get_daily_ranking_image(sess)
 		if get_index(sys.argv, "-m") != -1:
