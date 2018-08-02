@@ -208,7 +208,7 @@ if __name__ == "__main__":
 		if get_index(sys.argv, "-d") != -1:
 			downloadDir = sys.argv[get_index(sys.argv, "-d")+1]
 			try:
-			os.chdir(Dir)
+				os.chdir(Dir)
 			except FileNotFoundError:
 				os.system("mkdir "+Dir)
 				os.chdir(Dir)
