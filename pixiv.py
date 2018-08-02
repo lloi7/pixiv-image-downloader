@@ -208,10 +208,10 @@ if __name__ == "__main__":
 		if get_index(sys.argv, "-d") != -1:
 			downloadDir = sys.argv[get_index(sys.argv, "-d")+1]
 			try:
-				os.chdir(Dir)
+				os.chdir(downloadDir)
 			except FileNotFoundError:
-				os.system("mkdir "+Dir)
-				os.chdir(Dir)
+				os.system("mkdir "+downloadDir)
+				os.chdir(downloadDir)
 		if get_index(sys.argv, "-r") != -1:
 			get_daily_ranking_image(sess)
 		if get_index(sys.argv, "-m") != -1:
