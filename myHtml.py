@@ -1,10 +1,11 @@
+
 def find(string, target, rank):
     place = -1
     for i in range(rank):
         place = string.find(target, place+1)
     return place
 
-
+	
 class HtmlElement:
 	def __init__(self, eleStr, show=False):
 		self.attrs = {}
@@ -14,13 +15,15 @@ class HtmlElement:
 		if eleStr != "":
 			self.create(eleStr, show=show)
 
-	def create(self, eleStr, show=False):
+	def create(self, eleStr, depth=0, show=False):
+		depth += 1
 		self.attrs = {}
 		self.subEle = []
 		attrHeader = eleStr[1:eleStr.find(">")]
 		if show:
 			print(attrHeader)
 			print("****************************")
+			print(depth)
 		while len(attrHeader) != 0 and attrHeader[0] != " ":
 			self.name += attrHeader[0]
 			attrHeader = attrHeader[1:]
@@ -29,14 +32,16 @@ class HtmlElement:
 		while len(attrHeader) != 0:
 			attr = ""
 			val = ""
-			while attrHeader[0] != "=":
+			while len(attrHeader) != 0 and attrHeader[0] != "=":
 				attr += attrHeader[0]
 				attrHeader = attrHeader[1:]
-			attrHeader = attrHeader[2:]
-			while attrHeader[0] != "\"":
+			if len(attrHeader) != 0:
+				attrHeader = attrHeader[2:]
+			while len(attrHeader) != 0 and attrHeader[0] != "\"":
 				val += attrHeader[0]
 				attrHeader = attrHeader[1:]
-			attrHeader = attrHeader[1:]
+			if len(attrHeader) != 0:
+				attrHeader = attrHeader[1:]
 			self.attrs[attr] = val
 			while len(attrHeader) != 0 and (attrHeader[0] == " " or attrHeader[0] == "\n" or attrHeader[0] == "\r"):
 				attrHeader = attrHeader[1:]
@@ -46,7 +51,7 @@ class HtmlElement:
 		eleStr = eleStr[eleStr.find("<"):]
 		while eleStr[:2] != '</':
 			sub = HtmlElement("")
-			eleStr = sub.create(eleStr, show=show)
+			eleStr = sub.create(eleStr, depth, show=show)
 			self.subEle.append(sub)
 		if eleStr[2:2+len(self.name)] == self.name:
 			eleStr = eleStr[eleStr[2:].find("<")+2:]
